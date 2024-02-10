@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Expenses</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #a367b1, #392467);
+            font-family: 'Times New Roman', serif;
+            color: #1d1d1d;
+            text-align: center;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 800px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.3);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Expenses</h1>
+
+        <!-- Display expenses -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Expense Name</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.date }}</td>
+                        <td>{{ expense.expensename }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>
+                            <a href="{{ url_for('updateexpense', id=expense.id) }}">Update</a> |
+                            <a href="{{ url_for('delete', id=expense.id) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Provide option to add a new expense -->
+        <p><a href="{{ url_for('add') }}">Add New Expense</a></p>
+
+        <!-- Display totals -->
+        <p>Total: {{ total }}</p>
+        <p>Total Business: {{ t_business }}</p>
+        <p>Total Other: {{ t_other }}</p>
+        <p>Total Food: {{ t_food }}</p>
+        <p>Total Entertainment: {{ t_entertainment }}</p>
+    </div>
+</body>
+</html>

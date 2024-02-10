@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Expense</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #a367b1, #392467);
+            font-family: 'Times New Roman', serif;
+            color: #1d1d1d;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 1.2em;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Expense</h1>
+        <form action="{{ url_for('edit') }}" method="post">
+            <input type="hidden" name="id" value="{{ expense.id }}">
+            <label for="date">Date:</label>
+            <input type="text" id="date" name="date" value="{{ expense.date }}" required>
+            <label for="expensename">Expense Name:</label>
+            <input type="text" id="expensename" name="expensename" value="{{ expense.expensename }}" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="{{ expense.amount }}" required>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="{{ expense.category }}" required>
+            <button type="submit">Update Expense</button>
+        </form>
+    </div>
+</body>
+</html>
